@@ -1,3 +1,4 @@
+import Head from "next/head";
 import Captcha from "../components/Captcha";
 import {useState} from "react";
 import {withIronSessionSsr} from 'iron-session/next';
@@ -34,15 +35,21 @@ export default function Home({defaultCaptchaKey}) {
     });
   }
   return (
-    <main>
-      <input type="text"
-             onChange={e => setMessage(e.target.value)}
-             placeholder="Message" value={message}/>
-      <div>
-        <Captcha captchaKey={captchaKey} onChange={setSelectedIndexes} />
-      </div>
-      <button onClick={send}>Send</button>
-    </main>
+    <div>
+      <Head>
+        <title>Next.js Image Captcha</title>
+        <meta name="description" content="Next.js implementation of an image-based CAPTCHA." />
+      </Head>
+      <main>
+        <input type="text"
+               onChange={e => setMessage(e.target.value)}
+               placeholder="Message" value={message}/>
+        <div>
+          <Captcha captchaKey={captchaKey} onChange={setSelectedIndexes} />
+        </div>
+        <button onClick={send}>Send</button>
+      </main>
+    </div>
   )
 }
 
